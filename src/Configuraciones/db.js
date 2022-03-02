@@ -1,6 +1,6 @@
 const sequelize = require('sequelize');
 const db = new sequelize(
-    'farmacia', //Nombre de la base de datos
+    'farmacia_grupo2', //Nombre de la base de datos
     'root', //Usuario de la base
     'Dohaca77', //Contraseña del usuario
     {

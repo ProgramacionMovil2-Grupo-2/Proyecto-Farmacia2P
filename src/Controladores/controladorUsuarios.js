@@ -30,19 +30,18 @@ exports.guardarUsuario = async(req, res) => {
     if(!validacion.isEmpty()){
         res.json(validacion.array());
     }else{
-        const { id, id_personas, login, correo, contrasena, estado, pin } = req.body;
+        const { id_personas, login, correo, contrasena, estado, pin } = req.body;
         
         if(!correo || !contrasena){
             res.send("Debe enviar los datos completos");
         }else{
             /*const buscarPersona = ModeloPersona.findOne({
                 where:{
-                    id: personas_id,
+                    id: id_personas,
                     estado: true
                 }
             })*/
             await ModeloUsuario.create({
-                id: id,
                 id_personas: id_personas,
                 login: login,
                 correo: correo,
@@ -66,35 +65,40 @@ exports.modificarUsuario = async(req, res) => {
     console.log(req.query);
     console.log(req.body);
     const { id } = req.query;
-    const { id_personas, login, correo, contrasena, estado, pin } = req.body;
-    if(!correo || !contrasena){
-        res.send("Enviar los datos completos");
+    const validacion = validationResult(req);
+    if(!validacion.isEmpty()){
+        res.json(validacion.array());
     }else{
-        var buscarUsuarios = await ModeloUsuario.findOne({
-            where:{
-                id: id
-                //estado:'1'
-            }
-        });
-        if(!buscarUsuarios){
-            res.send("El id no existe");
+        const { id_personas, login, correo, contrasena, estado, pin } = req.body;
+        if(!correo || !contrasena){
+            res.send("Enviar los datos completos");
         }else{
-            buscarUsuarios.id_personas=id_personas;
-            buscarUsuarios.login=login;
-            buscarUsuarios.correo=correo;
-            buscarUsuarios.contrasena=contrasena;
-            buscarUsuarios.estado=estado;
-            buscarUsuarios.pin=pin;
+            var buscarUsuarios = await ModeloUsuario.findOne({
+                where:{
+                    id: id
+                    //estado:'1'
+                }
+            });
+            if(!buscarUsuarios){
+                res.send("El id no existe");
+            }else{
+                buscarUsuarios.id_personas=id_personas;
+                buscarUsuarios.login=login;
+                buscarUsuarios.correo=correo;
+                buscarUsuarios.contrasena=contrasena;
+                buscarUsuarios.estado=estado;
+                buscarUsuarios.pin=pin;
 
-            await buscarUsuarios.save()
-            .then((data)=>{
-                console.log(data);
-                res.send("Registro actualizado");
-            })
-            .catch((error)=>{
-                console.log(error);
-                res.send("Error al actualizar los datos");
-            })
+                await buscarUsuarios.save()
+                .then((data)=>{
+                    console.log(data);
+                    res.send("Registro actualizado");
+                })
+                .catch((error)=>{
+                    console.log(error);
+                    res.send("Error al actualizar los datos");
+                })
+            }
         }
     }
 };

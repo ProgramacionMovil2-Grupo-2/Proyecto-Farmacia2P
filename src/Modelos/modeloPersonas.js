@@ -47,8 +47,9 @@ const Persona = db.define(
             allowNull: true,
         },
         tipo:{
-            type:sequelize.STRING(70),
+            type:sequelize.ENUM('CL','EM'),
             allowNull: false,
+            defaultValue: 'EM'
         },
     },
     {

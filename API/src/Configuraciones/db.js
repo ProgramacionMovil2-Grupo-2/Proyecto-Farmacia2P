@@ -1,8 +1,8 @@
 const sequelize = require('sequelize');
 const db = new sequelize(
-    'farmacia_final', //Nombre de la base de datos
+    'Farmacia_Grupo2', //Nombre de la base de datos
     'root', //Usuario de la base
-    'admin', //Contraseña del usuario
+    'ca1d3r0n', //Contraseña del usuario
     {
         host: 'localhost', //servidor
         dialect: 'mysql', //dbms

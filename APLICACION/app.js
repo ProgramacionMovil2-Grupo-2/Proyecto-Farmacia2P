@@ -1,15 +1,13 @@
-import TipoEntrega from './src/componentes/tipoEntrega';
-import Sucursal from './src/componentes/sucursal';
-import ConfirmarSucursal from './src/componentes/confirmarSucursal';
-import Domicilio from './src/componentes/domicilio';
-import ConfirmarDomicilio from './src/componentes/confirmarDomicilio';
+import Login from './src/componentes/login';
+import Registro from './src/componentes/pantallaRegistro';
+import Perfil from './src/componentes/pantallaPerfil';
+import Correo from './src/componentes/pantallaCorreo';
+
 export default function App() {
   return (
-    //  <TipoEntrega></TipoEntrega>,
-    // <TipoEntrega></TipoEntrega>
-    //<Sucursal></Sucursal>
-    // <ConfirmarSucursal></ConfirmarSucursal>
-   // <Domicilio></Domicilio>
-   <ConfirmarDomicilio></ConfirmarDomicilio>
+    <Registro></Registro>
+    //<Login></Login>
+    //<Perfil></Perfil>
+    //<Correo></Correo>
   );
 }

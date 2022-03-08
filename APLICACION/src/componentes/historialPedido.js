@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
     position: "relative",
     top: -10,
   },
-  //----------------
+  //-----------
   contenedorControles: {
     
     flexDirection:"column",

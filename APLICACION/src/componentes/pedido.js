@@ -1,13 +1,12 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Button, TextInput, Input } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
 //import { withTheme } from 'react-native-elements';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Position from 'react-native/Libraries/Components/Touchable/Position';
 
-export default function tipoEntrega() {
-  const { sucursal, setSucursal } = useState(null);
+export default function buscarProducto() {
+  const [nombre, setNombre] = useState(null);
   return (
     <View style={styles.Entregas}>
       <View style={styles.entrega1}>
@@ -41,29 +40,31 @@ export default function tipoEntrega() {
         <View style={styles.OpEntrega1}>
           <TouchableOpacity style={styles.OpEntregaPedi}>
             <View style={styles.circleIcon}>
-              <Feather name='image' style={{ fontSize: 25, marginTop:65, width:75}} />
-              <Text style={styles.tituloEntrega}>L.</Text>
+              <Feather name='image' style={{marginLeft:60, fontSize: 25, marginTop:65, width:95}} />
+              <Text style={styles.tituloEntrega1}>L.  0.00</Text>
             </View>
             
             <View>
                 <Text style={styles.tituloEntrega}>Resumen Pedido:</Text>
                 <TouchableOpacity style={styles.OpEntregaPediC}>
                   <Text style={styles.tituloEntrega}>Descuento Aplicado (L.):</Text>
-                  <TextInput placeholder='0.00' style={styles.input} onChangeText={(text) => onChangeText(text)}/>
+                  <TextInput placeholder='0.00' style={styles.input}/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.OpEntregaPediC}>
                   <Text style={styles.tituloEntrega}>Costo Envío (L.):</Text>
-                  <TextInput placeholder='0.00' style={styles.input2} onChangeText={(text) => onChangeText(text)}/>
+                  <TextInput placeholder='0.00' style={styles.input2}/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.OpEntregaPediC}>
                   <Text style={styles.tituloEntrega}>Total + Envío (L.):</Text>
-                  <TextInput placeholder='0.00' style={styles.input3} onChangeText={(text) => onChangeText(text)}/>
+                  <TextInput placeholder='0.00' style={styles.input3}/>
                 </TouchableOpacity>
+
                 </View>
             
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.OpEntrega}>
+
             <View>
                 <View>
                 <Text style={styles.tituloEntrega}>Entregar Producto en:</Text>
@@ -71,7 +72,7 @@ export default function tipoEntrega() {
                   <Text style={styles.tituloEntrega}>Direccion del Cliente</Text>
                   <View style={styles.botonCambiar}>
                   <Button 
-                    title="Cambiar" color={"#5FBC3E"}></Button>
+                    title="Cambiar" color={"#00A41F"}></Button>
                   </View>
                 </TouchableOpacity>
 
@@ -86,16 +87,6 @@ export default function tipoEntrega() {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.contenedorBotones}>
-            <View style={styles.boton}>
-              <Button title="Atras"
-              ></Button>
-            </View>
-            <View style={styles.boton}>
-              <Button title="Confirmar"
-              ></Button>
-            </View>
-        </View>
 
         <TouchableOpacity style={styles.menu1}>
           <View style={styles.menu}>
@@ -112,16 +103,20 @@ export default function tipoEntrega() {
 }
 
 const styles = StyleSheet.create({
+  subtitulo:{
+    marginLeft:5,
+    marginRight:5
+  },
   Entregas: {
     alignItems: "center",
     justifyContent: "center",
     margin: 0,
-    padding: 10,
+    padding: 4,
     width: "100%",
     height: "100%",
   },
   entrega1: {
-    backgroundColor: '#BAFBB9',
+    backgroundColor: '#DEFFDA',
     borderWidth: 2,
     borderColor: "#dedede",
     borderRadius: 5,
@@ -146,27 +141,29 @@ const styles = StyleSheet.create({
   opciones: {
     flexDirection: "row",
     position: 'relative',
-    left: 350,
+    left: 425,
     position: "relative",
-    top: -110
+    top: -27
   },
   tilOp: {
-    backgroundColor: "#31C02E",
+    backgroundColor: "#00A41F",
     paddingBottom: 0,
     alignItems: "stretch",
-    paddingTop: 100,
+    paddingTop: 10,
     position: "relative",
-    top: -50
+    top: -138
   },
   ti: {
     position: "relative",
-    top: -70,
+    alignItems: "center",
+    top: 5,
     fontSize: 25,
-    left: 140,
+    left: 195,
   },
   progre: {
     position: "relative",
-    top: -158
+    top: -158,
+    backgroundColor: "#00A41F",
   },
   avance: {
     flexDirection: "row",
@@ -176,59 +173,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between"
   },
-  circleIcon: {
-    backgroundColor: "#5FBC3E",
-    borderRadius: 20,
-    padding: 9,
-    position: 'relative',
-    left: -5,
-    fontSize: 10,
-  },
-  OpEntregaPedi: {
-    flexDirection: "row",
-    marginTop: 10,
-    backgroundColor: "#FFFFFF",
-    paddingVertical: 3,
-    paddingHorizontal: 6,
-    borderRadius: 10,
-    position: "relative",
-    top: -90,
-    height: 190,
-  },
-  OpEntregaPediC: {
-    flexDirection: "row",
-    marginTop: 5,
-    backgroundColor: "#BAFBB9",
-    borderRadius: 10,
-    position: "relative",
-    textAlign: 'center',
-    height: 40,
-    width: 160
-  },
-  input:{
-    borderColor: "black",
-    borderWidth: 1,
-    marginLeft: 10,
-    textAlign: 'center',
-    width: 50,
-    position: 'relative'
-  },
-  input2:{
-    borderColor: "black",
-    borderWidth: 1,
-    marginLeft: 60,
-    textAlign: 'center',
-    width: 50,
-    position: 'relative'
-  },
-  input3:{
-    borderColor: "black",
-    borderWidth: 1,
-    marginLeft: 53,
-    textAlign: 'center',
-    width: 50,
-    position: 'relative'
-  },
   OpEntrega: {
     flexDirection: "row",
     marginTop: 10,
@@ -237,14 +181,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 6,
     borderRadius: 10,
     position: "relative",
-    top: -70,
-    height: 130,
+    top: -75,
+    height: 150,
   },
   horario: {
     position: 'relative',
-    left: -90,
+    left: 10,
     paddingVertical: 15,
-    fontSize: 10,
+    fontSize: 13,
   },
   total: {
     flexDirection: "row",
@@ -259,53 +203,82 @@ const styles = StyleSheet.create({
   ico: {
     paddingVertical: 5,
   },
-  menu: {
+//body
+  OpEntregaPedi: {
+    flexDirection: "row",
+    marginTop: 10,
     backgroundColor: "#FFFFFF",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    padding: 10,
-    paddingHorizontal: 15,
+    paddingVertical: 3,
+    paddingHorizontal: 6,
+    borderRadius: 10,
     position: "relative",
-    top: -10,
+    top: -115,
+    height: 195,
+    bottom: -50
   },
-  //--------------
-  contenedorControles: {
-    
-    flexDirection:"column",
-    alignItems: "stretch",
-    justifyContent:"center",
-    padding:0,
-    top:-50,
-  },
-  sombraControles: {
-    shadowColor: '#171717',
-    shadowOffset: {width: 0, height: 0},
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-  },
-  controles:{
-    flex:3,
+  OpEntregaPediC: {
     flexDirection: "row",
-    marginBottom:30,
-    paddingLeft:10,
-    paddingRight:10,
+    marginTop: 5,
+    borderRadius: 5,
+    borderColor: "black",
+    position: "relative",
+    textAlign: 'center',
+    height: 40,
+    width: 170
   },
-  contenedorBotones:{
-    paddingLeft:10,
-    marginTop:0,
-    alignItems:"center",
-    justifyContent:"center",
-    flexDirection: "row",
-    height:100,
+  circleIcon: {
+    backgroundColor: "#00A41F",
+    borderRadius: 20,
+    padding: 9,
+    position: 'relative',
+    textAlign: 'center',
+    left: -5,
+    top: 10,
+    fontSize: 10,
+    height: 170
   },
-  boton:{
-    flex:1,
+  tituloEntrega1: {
+    marginTop:45,
+    marginLeft:50
+  },
+  tituloEntrega:{
+    textAlign: 'center',
+    marginTop: 13,
+    marginLeft: 15
+  },
+  botonCambiar:{
     marginTop:10,
-    alignItems:"stretch",
-    marginLeft:10,
-    marginRight:10,
-    height:'40%',
-    width:170,
+    marginLeft:170,
+    height:50,
+    width:120,
+    color: "#000000"
+  },
+  input:{
+    borderRadius: 10,
+    borderColor: "black",
+    borderWidth: 1,
+    marginLeft: 40,
+    textAlign: 'center',
+    width: 70,
+    position: 'relative'
+  },
+  input2:{
+    borderRadius: 10,
+    borderColor: "black",
+    borderWidth: 1,
+    marginLeft: 90,
+    textAlign: 'center',
+    width: 70,
+    position: 'relative'
+  },
+  input3:{
+    borderRadius: 10,
+    borderColor: "black",
+    borderWidth: 1,
+    marginLeft: 85,
+    textAlign: 'center',
+    width: 70,
+    position: 'relative'
   },
   OpEntrega2: {
     flexDirection: "row",
@@ -314,13 +287,66 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     position: "relative",
     height: 40,
-    width: 220
+    width: 280
   },
-  botonCambiar:{
-    marginTop:10,
-    marginLeft:100,
-    height:50,
-    width:80,
-    color: "#000000"
+  tituloEntregatext: {
+    borderRadius: 5,
+    borderColor: "black",
+    top: 7,
+    marginLeft: 25,
+  },
+
+
+  menu: {
+    backgroundColor: "#FFFFFF",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10,
+    paddingHorizontal: 15,
+    position: "relative",
+    top: 142,
+  },
+  registrar: {
+    width: "100%",
+    height: 60,
+    marginTop: 40,
+    alignContent: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+    borderRadius: 40,
+    backgroundColor: '#0D7701',
+    top: 220,
+  },
+  tituloBoton2: {
+    color: "#FFFFFF",
+    fontSize: 15,
+    fontWeight: "600",
+  },
+  tituloBoton2: {
+    color: "#FFFFFF",
+    fontSize: 20,
+    fontWeight: "600",
+  },
+  controles: {
+    flex: 3,
+    marginBottom: 1,
+    paddingLeft: 10,
+    paddingRight: 10,
+
+  },
+  entradas: {
+    flexDirection: "row",
+    marginTop: 40,
+    backgroundColor: "#FFFFFF",
+    paddingVertical: 15,
+    paddingHorizontal: 6,
+    borderRadius: 10,
+    position: "relative",
+    top: -235,
   }
+
+
+
+
 });

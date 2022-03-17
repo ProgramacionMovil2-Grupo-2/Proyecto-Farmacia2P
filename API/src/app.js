@@ -8,7 +8,7 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 app.set('json spaces', 2);
-//app.use('/usuario/img/', express.static(path.join(__dirname, 'public/img')));
+app.use('/usuario/img/', express.static(path.join(__dirname, 'public/img')));
 app.use('/api/', rutas);
 app.use('/api/personas/', require('./Rutas/rutasPersonas'));
 app.use('/api/usuarios/', require('./Rutas/rutasUsuarios'));
@@ -24,7 +24,7 @@ app.use('/api/inventario/', require("./Rutas/rutasInventario"));
 app.use('/api/sucursales', require('./Rutas/rutasSucursal'));
 app.use('/api/pedidos', require('./Rutas/rutasPedido'));
 app.use('/api/entregas', require('./Rutas/rutasEntrega'));
-//app.use('/api/archivos/', require('./rutas/rutasArchivos'));
+app.use('/api/archivos/', require('./rutas/rutasArchivos'));
 app.listen(4001, ()=>{
     console.log("Servidor iniciado en el puerto 4001");
 }); 

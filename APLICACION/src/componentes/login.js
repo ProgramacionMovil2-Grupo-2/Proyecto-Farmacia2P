@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert, Image } from 'react-native';
-//import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StyleSheet, Text, View, TextInput, Button, Alert, Image, ImageBackground } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function login() {
     const [usuario, setUsuario] = useState(null);
@@ -10,7 +10,8 @@ export default function login() {
         if(!usuario || !contrasena){
             console.log("Escriba los datos completos");
             Alert.alert("ALERTA", "Escriba los datos completos");
-        }else{
+          }
+        else{
             try {
                 const respuesta = await fetch(
                     'http://192.168.1.2:4001/api/autenticacion/iniciosesion',{
@@ -26,25 +27,49 @@ export default function login() {
                     });
                 const json = await respuesta.json();
                 console.log(json);
-                Alert.alert("ALERTA", "Petición procesada");
+                const data = json.data;
+
+                if(!data.token){
+                  
+                }else{
+                  const token = data.token;
+                  console.log(token);
+                  await AsyncStorage.setItem('Token', token);
+                }
+                Alert.alert("ALERTA", json.msj);
             } catch (error) {
                 console.error(error);
             }
         }
     }
+    const pressToken = async () => {
+      try {
+          var token = await AsyncStorage.getItem('Token');
+          console.log(token);
+          Alert.alert("TOKEN", token);
+          //await AsyncStorage.removeItem('Token');
+          token = await AsyncStorage.getItem('Token');
+          if(!token){
+              Alert.alert("TOKEN", "Token eliminado");
+          }
+      } catch (error) {
+          console.error(error);
+      }
+  }
   return (
     <View style={styles.contenedor}>
+    <ImageBackground source={require("../../images/fondo3.jpg")} resizeMode="cover" style={styles.image}>
       <View style={styles.contenedorLogin}>
         <View style={styles.contenedorTitulo}>
           <Text style={styles.tituloLogin}>LOGIN</Text>
         </View>
         <View style={styles.contenedorLogo}>
           <Image style={{ width: 130, height: 130, marginBottom: 20, marginTop: 10 }}
-          source={require("../../images/Logo.png")}/>
+          source={require("../../images/Logo2.png")}/>
         </View>
         <View style={[styles.contenedorControles, styles.sombraControles]}>
           <View style={styles.controles}>
-          <Text>   Usuario:</Text>
+          <Text style={styles.titulos}>   Usuario:</Text>
             <TextInput
             value={usuario}
             onChangeText= {setUsuario}
@@ -53,7 +78,7 @@ export default function login() {
               style={styles.entradas}
             >
             </TextInput>
-            <Text>   Contraseña:</Text>
+            <Text style={styles.titulos}>   Contraseña:</Text>
             <TextInput
             value={contrasena}
             onChangeText= {setContrasena}
@@ -68,28 +93,36 @@ export default function login() {
           <View style={styles.botonRedes}>
               <Button 
                 title="INICIAR SESIÓN" color={"#0D7701"} 
-                onPress={presIniciarSesion} >
+                onPress={presIniciarSesion}>
               </Button>
             </View>
             <View style={styles.contenedorBotones}>
-            <View style={styles.boton}>
-              <Text onPress={presIniciarSesion}>¿No tienes una cuenta?</Text>
-            </View>
-            <View style={styles.boton}>
-              <Button title="Registrate" color={"#3A6C96"} //hover={"#FFFFFF"}
-              onPress={presIniciarSesion}
+              <View style={styles.boton}>
+                <Text style={styles.titulos2}>¿No tienes una cuenta?</Text>
+              </View>
+              <View style={styles.boton}>
+              <Button title="Registrate" color={"#3A6C96"} fontSize="200"//hover={"#FFFFFF"}
+              onPress={pressToken}
               ></Button>
             </View>
           </View>
         </View>
       </View>
+      </ImageBackground>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  image: {
+    alignItems: 'center',
+    justifyContent: "center",
+    margin:0,
+    padding: 0,
+    width:"110%",
+    height:"105%",
+  },
   contenedor: {
-    backgroundColor:"#DEFFDA",
     alignItems: 'center',
     justifyContent: "center",
     margin:0,
@@ -104,15 +137,12 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   contenedorTitulo: {
-    backgroundColor: '#328642',
     flexDirection:"column",
     alignItems: "center",
     justifyContent: "center",
     marginTop:-0,
     marginVertical:20,
     height:60,
-    borderBottomWidth:3,
-    borderColor:'#000000'
   },
   contenedorLogo: {
     flexDirection:"column",
@@ -124,10 +154,7 @@ const styles = StyleSheet.create({
     flexDirection:"column",
     alignItems: "stretch",
     justifyContent:"center",
-    borderWidth: 1,
-    borderColor: "#dedede",
     borderRadius:25,
-    backgroundColor:"#fff",
     padding:20
     
   },
@@ -139,7 +166,17 @@ const styles = StyleSheet.create({
   },
   tituloLogin: {
       color: "#FFFFFF" ,
-      fontSize: 30,
+      fontSize: 40,
+      fontWeight: "700",
+    },
+    titulos: {
+      color: "#FFFFFF" ,
+      fontSize: 28,
+      fontWeight: "700",
+    },
+    titulos2: {
+      color: "#FFFFFF" ,
+      fontSize: 18,
       fontWeight: "700",
     },
   controles:{
@@ -175,9 +212,9 @@ const styles = StyleSheet.create({
   entradas:{
     flex:1,
     alignItems:"stretch",
-    margin:10,
+    margin:7,
     padding:10,
-    fontSize: 20,
+    fontSize: 18,
     fontWeight:"400",
     color: "#495057",
     backgroundColor:"#fff",

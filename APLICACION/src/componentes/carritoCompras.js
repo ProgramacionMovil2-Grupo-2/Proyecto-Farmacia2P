@@ -49,7 +49,6 @@ export default function sucursales() {
             <Text style={styles.item2}>Precio Unidad(L.):</Text>
             <Text style={styles.item3}>Total + ISV(L.):</Text>
             <Text style={styles.cantidad}>Cantidad:</Text>
-            <TextInput placeholder="1" style={styles.entradascantidad}></TextInput>
             <View style={styles.botonesA}> 
             <TouchableOpacity style={styles.botones}>
             <Text style={styles.tituloBoton}>+</Text>
@@ -118,7 +117,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   carrito1: {
-    backgroundColor: '#BAFBB9',
+    backgroundColor: '#DEFFDA',
     borderWidth: 2,
     borderColor: "#dedede",
     borderRadius: 5,
@@ -148,7 +147,7 @@ const styles = StyleSheet.create({
     top: -110
   },
   tilOp: {
-    backgroundColor: "#31C02E",
+    backgroundColor: "#00A41F",
     paddingBottom: 0,
     alignItems: "stretch",
     paddingTop: 100,
@@ -198,7 +197,7 @@ const styles = StyleSheet.create({
   OpCarrito: {
   flexDirection: "row",
   marginTop: 40,
-   width:380,
+   width:'100%',
    height: 70,
    marginTop: 40,
    alignContent: "center",
@@ -238,7 +237,7 @@ const styles = StyleSheet.create({
      padding: 10,
      borderRadius: 5,
      borderBottomWidth: 1,
-     backgroundColor: '#FFFFFFF',
+     backgroundColor: '#FFFFFF',
      position: "relative",
      top: 20,
     left: -30,

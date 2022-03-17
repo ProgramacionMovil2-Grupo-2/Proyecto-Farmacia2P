@@ -26,7 +26,7 @@ export default function correo() {
                 console.log(json);
                 Alert.alert("ALERTA", "Petición procesada");
             } catch (error) {
-                console.error(error);
+              console.error(error);
             }
         }
     }
@@ -34,11 +34,11 @@ export default function correo() {
         <View style={styles.contenedor}>
           <View style={styles.contenedorRegistro}>
             <View style={styles.contenedorTitulo}>
-              <Text style={styles.tituloLogin}>PIN DE RECUPERACION</Text>
+              <Text style={styles.tituloLogin}>CORREO DE RECUPERACION</Text>
             </View>
             <View style={styles.contenedorLogo}>
-              <Image style={{ width: 150, height: 150, marginBottom: 30, marginTop: 50 }}
-              source={require("../../images/Logo.png")}/>
+              <Image style={{ width: 140, height: 140, marginBottom: 30, marginTop: 50 }}
+              source={require("../../images/Logo2.png")}/>
             </View>
             <View style={[styles.contenedorControles, styles.sombraControles]}>
               <View style={styles.controles}>
@@ -80,14 +80,12 @@ export default function correo() {
         width: '100%',
       },
       contenedorTitulo: {
-        backgroundColor: '#328642',
+        backgroundColor: '#00A41F',
         flexDirection:"column",
         alignItems: "center",
         justifyContent: "center",
         marginTop:27,
-        height:50,
-        borderBottomWidth:3,
-        borderColor:'#000000'
+        height:80,
       },
       contenedorControles: {
         flex: 1,
@@ -109,7 +107,7 @@ export default function correo() {
       },
       tituloLogin: {
           color: "#FFFFFF" ,
-          fontSize: 20,
+          fontSize: 23,
           fontWeight: "700",
         },
       tituloinput: {
@@ -117,7 +115,7 @@ export default function correo() {
         marginTop:20,
         marginVertical:10,
         alignItems:"flex-start",
-        fontSize: 14,
+        fontSize: 18,
         fontWeight: "500",
       },
       tituloBoton2: {

@@ -1,38 +1,39 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
 import { withTheme } from 'react-native-elements';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function buscarProducto() {
-  const [nombre, setProducto] = useState(null);
-
+  const [nombre, setNombre] = useState(null);
+  const [filtro, setFiltro] = useState(null);
   const presBuscarProducto = async () => {
-    if (!correo) {
+    if (!filtro) {
       console.log("Escriba los datos completos");
-      Alert.alert("ALERTA", "Escriba los datos completos");
+      Alert.alert("MEDI", "Escriba los datos completos");
     } else {
       try {
         const respuesta = await fetch(
-          'http://192.168.1.7:4001/api/productos/listar', {
-          method: 'POST',
+          'http://192.168.1.7:4001/api/productos/buscarProducto?filtro=', {
+          method: 'GET',
           headers: {
             accept: 'application/json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            correo: correo,
+          query: JSON.stringify({
+            nombre: filtro
           })
         });
         const json = await respuesta.json();
         console.log(json);
-        Alert.alert("ALERTA", "Petición procesada");
+        Alert.alert("MEDI", "Petición procesada");
       } catch (error) {
         console.error(error);
       }
     }
   }
+
   return (
     <View style={styles.Entregas}>
       <View style={styles.entrega1}>
@@ -46,8 +47,8 @@ export default function buscarProducto() {
 
 
         <TextInput
-          //value={usuario}
-          //onChangeText= {setUsuario}
+          value={filtro}
+          onChangeText={setFiltro}
 
           placeholder="Busca tu medicamento"
           style={styles.entradas}
@@ -87,7 +88,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   entrega1: {
-    backgroundColor: '#BAFBB9',
+    backgroundColor: '#DEFFDA',
     borderWidth: 2,
     borderColor: "#dedede",
     borderRadius: 5,
@@ -112,23 +113,23 @@ const styles = StyleSheet.create({
   opciones: {
     flexDirection: "row",
     position: 'relative',
-    left: 350,
+    left: 400,
     position: "relative",
     top: -27
   },
   tilOp: {
-    backgroundColor: "#31C02E",
+    backgroundColor: "#00A41F",
     paddingBottom: 0,
     alignItems: "stretch",
     paddingTop: 10,
     position: "relative",
-    top: -209
+    top: -240
   },
   ti: {
     position: "relative",
     top: 5,
     fontSize: 25,
-    left: 82,
+    left: 130,
   },
   progre: {
     position: "relative",
@@ -186,11 +187,11 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingHorizontal: 15,
     position: "relative",
-    top: 229,
+    top: 265,
   },
   registrar: {
-    width: 380,
-    height: 70,
+    width: "100%",
+    height: 60,
     marginTop: 40,
     alignContent: "center",
     justifyContent: 'center',
@@ -198,7 +199,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 40,
     backgroundColor: '#0D7701',
-    top: 150,
+    top: 220,
   },
   tituloBoton2: {
     color: "#FFFFFF",
@@ -225,6 +226,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 6,
     borderRadius: 10,
     position: "relative",
-    top: -150,
+    top: -235,
+    fontSize: 20,
   }
 });

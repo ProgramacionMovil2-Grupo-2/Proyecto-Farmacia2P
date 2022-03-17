@@ -73,6 +73,17 @@ export default function tipoEntrega() {
           </TouchableOpacity>
         </View>
 
+        <View style={styles.OpEntrega1}>
+
+          <TouchableOpacity style={styles.OpEntrega}>
+            <View style={styles.circleIcon}>
+              <Feather name='plus' style={{ fontSize: 25 }} />
+            </View>
+            <Text style={styles.tituloEntrega}></Text>
+            <Text style={styles.horario}>Producto6</Text>
+          </TouchableOpacity>
+        </View>
+
 
 
         <TouchableOpacity style={styles.menu1}>
@@ -124,9 +135,9 @@ const styles = StyleSheet.create({
   opciones: {
     flexDirection: "row",
     position: 'relative',
-    left: 350,
+    left: 410,
     position: "relative",
-    top: -26
+    top: -20
   },
   tilOp: {
     backgroundColor: "#31C02E",
@@ -134,13 +145,13 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     paddingTop: 10,
     position: "relative",
-    top: -80
+    top: -21
   },
   ti: {
     position: "relative",
-    top: 5,
+    top: 9,
     fontSize: 25,
-    left: 140,
+    left: 180,
   },
   progre: {
     position: "relative",
@@ -157,7 +168,7 @@ const styles = StyleSheet.create({
   circleIcon: {
     backgroundColor: "#5FBC3E",
     borderRadius: 100,
-    padding: 9,
+    padding: 15,
     position: 'relative',
     left: -5,
     fontSize: 10,
@@ -166,17 +177,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 40,
     backgroundColor: "#FFFFFF",
-    paddingVertical: 3,
+    paddingVertical: 5,
     paddingHorizontal: 6,
     borderRadius: 10,
     position: "relative",
-    top: -80,
+    top: -15,
   },
   horario: {
     position: 'relative',
-    left: 115,
+    left: 140,
     paddingVertical: 15,
-    fontSize: 12,
+    fontSize: 18,
   },
   total: {
     flexDirection: "row",
@@ -198,7 +209,7 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingHorizontal: 15,
     position: "relative",
-    top: 100,
+    top: 42,
   },
   registrar: {
     width: 380,

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert, Image, TouchableOpacity } from 'react-native';
 //import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function registro() {
+export default function pantallaRegistro() {
   const [correo, setCorreo] = useState(null);
   const [contrasena, setContrasena] = useState(null);
   const [login, setLogin] = useState(null);
@@ -47,20 +47,11 @@ export default function registro() {
         </View>
         <View style={styles.contenedorLogo}>
           <Image style={{ width: 80, height: 80, marginBottom: 10, marginTop: 10 }}
-          source={require("../../images/Logo.png")}/>
+          source={require("../../images/Logo2.png")}/>
         </View>
         <View style={[styles.contenedorControles, styles.sombraControles]}>
           <View style={styles.controles}>
-              <Text>   Id persona:</Text>
-              <TextInput
-                value={id_personas}
-                onChangeText= {setIdPersonas}
-  
-              placeholder="Ej. 12"
-              style={styles.entradas}
-              >
-              </TextInput>
-              <Text>   Usuario:</Text>
+              <Text style={styles.textinput}>   Usuario:</Text>
               <TextInput
                 value={login}
                 onChangeText= {setLogin}
@@ -69,7 +60,7 @@ export default function registro() {
                 style={styles.entradas}
               >
               </TextInput>
-              <Text>   Correo electrónico:</Text>
+              <Text style={styles.textinput}>   Correo electrónico:</Text>
               <TextInput
                 value={correo}
                 onChangeText= {setCorreo}
@@ -78,7 +69,7 @@ export default function registro() {
                 style={styles.entradas}
               >
               </TextInput>
-              <Text>   Contraseña:</Text>
+              <Text style={styles.textinput}>   Contraseña:</Text>
               <TextInput
                 value={contrasena}
                 onChangeText= {setContrasena}
@@ -87,7 +78,7 @@ export default function registro() {
                 style={styles.entradas}
               >
               </TextInput>
-              <Text>   Pin:</Text>
+              <Text style={styles.textinput}>   Pin:</Text>
               <TextInput
                 value={pin}
                 onChangeText= {setpin}
@@ -98,7 +89,7 @@ export default function registro() {
               </TextInput>
             <View style={styles.contenedorBotones}>
               <View style={styles.boton}>
-                <Text>¿Ya tienes una cuenta?</Text>
+                <Text style={styles.textcuenta}>¿Ya tienes una cuenta?</Text>
               </View>
               <View style={styles.iniciarSesion}>
                 <TouchableOpacity>
@@ -120,6 +111,12 @@ export default function registro() {
 }
 
 const styles = StyleSheet.create({
+  textinput:{
+    fontSize:18
+  },
+  textcuenta:{
+    fontSize:16
+  },
   contenedor: {
     alignItems: 'center',
     justifyContent: "center",
@@ -135,14 +132,12 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   contenedorTitulo: {
-    backgroundColor: '#328642',
+    backgroundColor: '#00A41F',
     flexDirection:"column",
     alignItems: "center",
     justifyContent: "center",
     marginTop:27,
-    height:50,
-    borderBottomWidth:3,
-    borderColor:'#000000'
+    height:80,
   },
   contenedorControles: {
     flex: 3,
@@ -164,7 +159,7 @@ const styles = StyleSheet.create({
   },
   tituloLogin: {
       color: "#FFFFFF" ,
-      fontSize: 20,
+      fontSize: 23,
       fontWeight: "700",
     },
   tituloBoton: {
@@ -228,8 +223,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#3A6C96',
   },
   registrar:{
-    width: 380,
-    height: 40,
+    width: '100%',
+    height: 50,
     marginTop:40,
     alignContent:"center",
     justifyContent: 'center',

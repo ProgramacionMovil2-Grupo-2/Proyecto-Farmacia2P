@@ -12,13 +12,13 @@ export default function perfil() {
     const [id, setid] = useState(null);
 
     const presModificar = async() =>{
-        if(!id_personas || !correo || !contrasena || !login){
+        if(!correo || !contrasena || !login){
             console.log("Escriba los datos completos");
             Alert.alert("MEDI", "Escriba los datos completos");
         }else{
             try {
                 const resp = await fetch(
-                    'http://192.168.1.2:4001/api/usuarios/modificarUsuario?id=7',{
+                    'http://192.168.1.2:4001/api/usuarios/modificarUsuario?id=1',{
                         method: 'PUT',
                         headers:{
                             accept: 'application/json',
@@ -27,13 +27,13 @@ export default function perfil() {
                         body:  JSON.stringify({
                             correo: correo,
                             contrasena: contrasena,
-                            id_personas: id_personas,
-                            login: login
+                            login: login,
+                            pin: pin
                         })
                     });
                 const json2 = await resp.json();
                 console.log(json2);
-                Alert.alert("MEDI", "Petición procesada");
+                Alert.alert("MEDI", "Registro modificado");
             } catch (error) {
               console.error(error);
             }
@@ -47,20 +47,11 @@ export default function perfil() {
           </View>
           <View style={styles.contenedorLogo}>
             <Image style={{ width: 80, height: 80, marginBottom: 10, marginTop: 10 }}
-            source={require("../../images/Logo.png")}/>
+            source={require("../../images/Logo2.png")}/>
           </View>
           <View style={[styles.contenedorControles, styles.sombraControles]}>
             <View style={styles.controles}>
-              <Text>   Id persona:</Text>
-              <TextInput
-                value={id_personas}
-                onChangeText= {setIdPersonas}
-  
-              placeholder="Ej. 12"
-              style={styles.entradas}
-              >
-              </TextInput>
-              <Text>   Usuario:</Text>
+              <Text style={styles.textinput}>   Usuario:</Text>
               <TextInput
                 value={login}
                 onChangeText= {setLogin}
@@ -69,7 +60,7 @@ export default function perfil() {
                 style={styles.entradas}
               >
               </TextInput>
-              <Text>   Correo electrónico:</Text>
+              <Text style={styles.textinput}>   Correo electrónico:</Text>
               <TextInput
                 value={correo}
                 onChangeText= {setCorreo}
@@ -78,7 +69,7 @@ export default function perfil() {
                 style={styles.entradas}
               >
               </TextInput>
-              <Text>   Contraseña:</Text>
+              <Text style={styles.textinput}>   Contraseña:</Text>
               <TextInput
                 value={contrasena}
                 onChangeText= {setContrasena}
@@ -87,7 +78,7 @@ export default function perfil() {
                 style={styles.entradas}
               >
               </TextInput>
-              <Text>   Pin:</Text>
+              <Text style={styles.textinput}>   Pin:</Text>
               <TextInput
                 value={pin}
                 onChangeText= {setpin}
@@ -110,6 +101,9 @@ export default function perfil() {
   }
   
   const styles = StyleSheet.create({
+    textinput:{
+      fontSize:18
+    },
     contenedor: {
       alignItems: 'center',
       justifyContent: "center",
@@ -125,14 +119,12 @@ export default function perfil() {
       width: '100%',
     },
     contenedorTitulo: {
-      backgroundColor: '#328642',
+      backgroundColor: '#00A41F',
       flexDirection:"column",
       alignItems: "center",
       justifyContent: "center",
       marginTop:27,
-      height:50,
-      borderBottomWidth:3,
-      borderColor:'#000000'
+      height:80,
     },
     contenedorControles: {
       flex: 3,
@@ -154,7 +146,7 @@ export default function perfil() {
     },
     tituloLogin: {
         color: "#FFFFFF" ,
-        fontSize: 20,
+        fontSize: 23,
         fontWeight: "700",
       },
     tituloBoton: {
@@ -218,7 +210,7 @@ export default function perfil() {
       backgroundColor: '#3A6C96',
     },
     actualizar:{
-      width: 380,
+      width: '100%',
       height: 40,
       marginTop:100,
       alignContent:"center",

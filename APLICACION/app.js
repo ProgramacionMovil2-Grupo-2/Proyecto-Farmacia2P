@@ -1,13 +1,10 @@
-import Login from './src/componentes/login';
-import Registro from './src/componentes/pantallaRegistro';
-import Perfil from './src/componentes/pantallaPerfil';
-import Correo from './src/componentes/pantallaCorreo';
+import react from "react";
+import Navigation from "./Navigation";
+
 
 export default function App() {
   return (
-    <Registro></Registro>
-    //<Login></Login>
-    //<Perfil></Perfil>
-    //<Correo></Correo>
+    <Navigation></Navigation>
+  
   );
 }

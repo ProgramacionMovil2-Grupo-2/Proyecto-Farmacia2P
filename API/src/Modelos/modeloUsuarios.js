@@ -10,10 +10,7 @@ const Usuario = db.define(
             autoIncrement: true,
             allowNull: false,
         },
-        id_personas:{
-            type:sequelize.INTEGER,
-            allowNull: false,
-        },
+        
         login:{
             type:sequelize.STRING(70),
             allowNull: false,

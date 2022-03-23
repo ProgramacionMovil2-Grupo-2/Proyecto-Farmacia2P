@@ -1,5 +1,5 @@
 
-const ModeloUsuario = require('../modelos/modeloUsuarios');
+const ModeloUsuario = require('../Modelos/modeloUsuarios');
 const { validationResult } = require('express-validator');
 
 exports.listarUsuarios = async(req, res) => {
@@ -30,7 +30,7 @@ exports.guardarUsuario = async(req, res) => {
     if(!validacion.isEmpty()){
         res.json(validacion.array());
     }else{
-        const { id_personas, login, correo, contrasena, estado, pin } = req.body;
+        const { login, correo, contrasena, estado, pin } = req.body;
         
         if(!correo || !contrasena){
             res.send("Debe enviar los datos completos");
@@ -42,7 +42,6 @@ exports.guardarUsuario = async(req, res) => {
                 }
             })*/
             await ModeloUsuario.create({
-                id_personas: id_personas,
                 login: login,
                 correo: correo,
                 contrasena: contrasena,
@@ -69,7 +68,7 @@ exports.modificarUsuario = async(req, res) => {
     if(!validacion.isEmpty()){
         res.json(validacion.array());
     }else{
-        const { id_personas, login, correo, contrasena, estado, pin } = req.body;
+        const { login, correo, contrasena, estado, pin } = req.body;
         if(!correo || !contrasena){
             res.send("Enviar los datos completos");
         }else{
@@ -82,7 +81,6 @@ exports.modificarUsuario = async(req, res) => {
             if(!buscarUsuarios){
                 res.send("El id no existe");
             }else{
-                buscarUsuarios.id_personas=id_personas;
                 buscarUsuarios.login=login;
                 buscarUsuarios.correo=correo;
                 buscarUsuarios.contrasena=contrasena;

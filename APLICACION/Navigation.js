@@ -52,7 +52,7 @@ export default function Navigaion() {
                 />
                 <Stack.Screen
                     name="Buscar"
-                    component={buscar}
+                    component={carrito}
                     options={{
                         tabBarLabel: 'Buscar Producto',
                         tabBarIcon: ({ color, size }) => (
@@ -105,6 +105,15 @@ export default function Navigaion() {
                     name="tipoEntrega"
                     component={tipoEntrega}
                 />
+                <Stack.Screen
+                    name="buscarProductos"
+                    component={buscar}
+                />
+
+                <Stack.Screen
+                    name="TipoEntrega"
+                    component={tipoEntrega}
+                />      
 
             </Stack.Navigator>
 

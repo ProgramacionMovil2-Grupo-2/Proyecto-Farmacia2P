@@ -20,7 +20,7 @@ export default function login() {
                             accept: 'application/json',
                             'Content-Type':'application/json'
                         },
-                        body:  JSON.stringify({
+                        body: JSON.stringify({
                             usuario: usuario,
                             contrasena: contrasena
                         })

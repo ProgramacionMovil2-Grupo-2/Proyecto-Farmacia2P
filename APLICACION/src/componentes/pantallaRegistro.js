@@ -1,19 +1,17 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert, Image, TouchableOpacity } from 'react-native';
-//import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function pantallaRegistro() {
   const [correo, setCorreo] = useState(null);
   const [contrasena, setContrasena] = useState(null);
   const [login, setLogin] = useState(null);
-  const [id_personas, setIdPersonas] = useState(null);
-  const [estado, setEstado] = useState(null);
   const [pin, setpin] = useState(null);
 
     const presRegistrar = async() =>{
         if(!correo || !contrasena){
             console.log("Escriba los datos completos");
-            Alert.alert("MEDI", "Escriba los datos completos");
+            Alert.alert("AVISO", "Escriba los datos completos");
         }else{
             try {
                 const respuesta = await fetch(
@@ -26,19 +24,39 @@ export default function pantallaRegistro() {
                         body:  JSON.stringify({
                             correo: correo,
                             contrasena: contrasena,
-                            id_personas: id_personas,
                             login: login,
                             pin: pin
                         })
                     });
                 const json = await respuesta.json();
                 console.log(json);
-                Alert.alert("MEDI", "Petición procesada");
+                const data = json.data;
+
+                if(!data.correo){
+                  
+                }else{
+                  const email = data.correo;
+                  console.log(email);
+                  await AsyncStorage.setItem('Correos', email);
+                }
+                Alert.alert("AVISO", "Petición procesada");
             } catch (error) {
                 console.error(error);
             }
         }
     }
+
+    /*const pressDatos = async () => {
+      try {
+          var correo = await AsyncStorage.getItem('Correos');
+          console.log(correo);
+          Alert.alert("CORREO", correo);
+          
+      } catch (error) {
+          console.error(error);
+      }
+  }*/
+
   return (
     <View style={styles.contenedor}>
       <View style={styles.contenedorRegistro}>
@@ -73,7 +91,7 @@ export default function pantallaRegistro() {
               <TextInput
                 value={contrasena}
                 onChangeText= {setContrasena}
-  
+                secureTextEntry={true}
                 placeholder="Ej. ********"
                 style={styles.entradas}
               >
@@ -101,6 +119,12 @@ export default function pantallaRegistro() {
               <TouchableOpacity 
                 onPress={presRegistrar}>
                 <Text style={styles.tituloBoton2} >REGISTRAR</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.registrar}>
+              <TouchableOpacity 
+                onPress={pressDatos}>
+                <Text style={styles.tituloBoton2} >VER</Text>
               </TouchableOpacity>
             </View>
           </View>

@@ -1,30 +1,27 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert, Image, TouchableOpacity } from 'react-native';
-//import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function perfil() {
     const [correo, setCorreo] = useState(null);
     const [contrasena, setContrasena] = useState(null);
     const [login, setLogin] = useState(null);
-    const [id_personas, setIdPersonas] = useState(null);
-    const [estado, setEstado] = useState(null);
     const [pin, setpin] = useState(null);
-    const [id, setid] = useState(null);
-
+  
     const presModificar = async() =>{
-        if(!correo || !contrasena || !login){
+        if(!correo || !contrasena){
             console.log("Escriba los datos completos");
             Alert.alert("MEDI", "Escriba los datos completos");
         }else{
             try {
                 const resp = await fetch(
-                    'http://192.168.1.2:4001/api/usuarios/modificarUsuario?id=1',{
+                    'http://192.168.1.2:4001/api/usuarios/modificarUsuario?id='+42,{
                         method: 'PUT',
                         headers:{
                             accept: 'application/json',
-                            'Content-Type':'application/json'
+                            'Content-Type':'application/json',
                         },
-                        body:  JSON.stringify({
+                        body: JSON.stringify({
                             correo: correo,
                             contrasena: contrasena,
                             login: login,
@@ -38,7 +35,19 @@ export default function perfil() {
               console.error(error);
             }
         }
-    }
+    };
+
+    /*const pressDatos = async () => {
+      try {
+          var correoG = await AsyncStorage.getItem('Correo');
+          console.log(correoG);
+          Alert.alert("CORREO", correoG);
+          
+      } catch (error) {
+          console.error(error);
+      }
+  }*/
+
     return (
       <View style={styles.contenedor}>
         <View style={styles.contenedorRegistro}>
@@ -73,7 +82,7 @@ export default function perfil() {
               <TextInput
                 value={contrasena}
                 onChangeText= {setContrasena}
-  
+                secureTextEntry={true}
                 placeholder="Ej. ********"
                 style={styles.entradas}
               >

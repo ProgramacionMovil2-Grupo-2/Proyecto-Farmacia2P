@@ -94,9 +94,12 @@ export default function tipoEntrega({ navigation }) {
                     Precio: {item.precio}
 
                   </Text>
-
-                  <Image source={{ uri: item.imagen }}
-                    style={{ width: 60, height: 60, left: 10, top: -45 }} />
+                  <View style={styles.image}>
+                  <Image source={{ uri: item.imagen }} style={{width: 60,  height: 60, left: -3, top: 2}}
+                  
+                    />
+                  </View>
+                 
 
 
                   <View style={styles.circleIcon}>
@@ -328,5 +331,13 @@ const styles = StyleSheet.create({
   },
   contenedorDentro: {
     borderRadius: 100,
+  },
+  image:{
+    width: 60, 
+    height: 70,
+     left: 10, 
+     top: -45,
+     borderWidth: 3,
+     borderColor: "#000000",
   }
 });

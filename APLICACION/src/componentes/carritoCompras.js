@@ -36,7 +36,7 @@ export default function App({ navigation }) {
 
   if (ejecucion == null) {
     try {
-        const buscardor=1;
+        const buscardor=2;
         const response = fetch("http://192.168.1.39:4001/api/mostrarcarrito/buscar?idCarrito="+buscardor)
         .then((response) => response.json())
         .then((json) => {
@@ -149,7 +149,13 @@ export default function App({ navigation }) {
                         </Text>
                         </Text>
                      
-                      <Image source={{uri: item.imagen}} style={{width: 120, height: 140, left: 300, top: -160}} />
+                        
+                  <View style={styles.image}>
+                  <Image source={{ uri: item.imagen }} style={{width: 100,  height: 120, left: 6, top: 2}}
+                  
+                    />
+                  </View>
+                      
                       
                       </View>
                       <TouchableOpacity style={styles.boton}>
@@ -443,6 +449,15 @@ const styles = StyleSheet.create({
          alignItems: "center",
 
       }
+      ,
+  image:{
+    width: 120, 
+    height: 140,
+    left: 300,
+    top: -160,
+     borderWidth: 3,
+     borderColor: "#000000",
+  }
    
 });
 

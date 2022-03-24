@@ -1,66 +1,101 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Pressable, FlatList } from 'react-native';
 import { withTheme } from 'react-native-elements';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function buscarProducto({navigation}) {
-  const [nombre, setNombre] = useState(null);
-  const [filtro, setFiltro] = useState(null);
-  const presBuscarProducto = async () => {
-    if (!filtro) {
-      console.log("Escriba los datos completos");
-      Alert.alert("MEDI", "Escriba los datos completos");
-    } else {
-      try {
-        const respuesta = await fetch(
-          'http://192.168.1.7:4001/api/productos/buscarProducto?filtro=', {
-          method: 'GET',
-          headers: {
-            accept: 'application/json',
-            'Content-Type': 'application/json'
-          },
-          query: JSON.stringify({
-            nombre: filtro
-          })
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+import "react-native-gesture-handler";
+
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+export default function tipoEntrega({ navigation }) {
+  const [info, setinfo] = useState([]);
+  const [ejecucion, setEjecucion] = useState(null);
+  const [id, setid] = useState(null);
+  const [descripcion, setdescripcion] = useState(null);
+
+  const { sucursal, setSucursal } = useState(null);
+
+  if (ejecucion == null) {
+    try {
+      const response = fetch("http://192.168.1.39:4001/api/tipos/listar")
+        .then((response) => response.json())
+        .then((json) => {
+          setinfo(json);
+          console.log(json);
         });
-        const json = await respuesta.json();
-        console.log(json);
-        Alert.alert("MEDI", "Petición procesada");
-      } catch (error) {
-        console.error(error);
-      }
+      setEjecucion(false);
+    } catch (error) {
+      setEjecucion(false);
+      console.error(error);
     }
   }
+
+  const elegir = async (item) => {
+    console.log(item);
+    setid(item.id);
+    setdescripcion(item.descripcion);
+    const datos = {
+      id: id,
+      descripcion: descripcion,
+    };
+    const datos_productos = JSON.stringify(datos);
+    await AsyncStorage.setItem("datos_productos", datos_productos);
+  };
 
   return (
     <View style={styles.Entregas}>
       <View style={styles.entrega1}>
 
+
+
         <View style={styles.tilOp}>
-          <Text style={styles.ti}>Buscar Productos</Text>
+          <Text style={styles.ti}>Categorias</Text>
           <View style={styles.opciones}>
             <AntDesign name='bars' style={{ fontSize: 30 }} />
           </View>
         </View>
 
+      
+        <FlatList
+          style={styles.sucursales}
+          data={info}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => {
+            return (
+              <Pressable
+                style={styles.contenedorFuera}
+              //    onPress={() => navigation.navigate("ConfirmarSucursal")}
+              >
+                <View style={styles.contenedorDentro}>
 
-        <TextInput
-          value={filtro}
-          onChangeText={setFiltro}
+                  
+                  <TouchableOpacity onPress={() => {
+                      navigation.navigate('Productos')
+                    }}>
+                      <Text style={styles.descripcion}>
 
-          placeholder="Busca tu medicamento"
-          style={styles.entradas}
-        >
-        </TextInput>
+                      {item.descripcion}
+                      </Text>
+                      </TouchableOpacity>
 
-        <View style={styles.registrar}>
-          <TouchableOpacity
-            onPress={presBuscarProducto}>
-            <Text style={styles.tituloBoton2} >Buscar</Text>
-          </TouchableOpacity>
-        </View>
+
+                </View>
+
+              </Pressable>
+            );
+          }}
+        />
+
+         
+
+        
 
 
 
@@ -104,6 +139,7 @@ export default function buscarProducto({navigation}) {
 
           </View>
         </View>
+
       </View>
     </View>
   );
@@ -112,6 +148,7 @@ export default function buscarProducto({navigation}) {
 const styles = StyleSheet.create({
   Entregas: {
     alignItems: "center",
+    backgroundColor: '#BAFBB9',
     justifyContent: "center",
     margin: 0,
     padding: 4,
@@ -119,7 +156,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   entrega1: {
-    backgroundColor: '#DEFFDA',
+    backgroundColor: 'white',
     borderWidth: 2,
     borderColor: "#dedede",
     borderRadius: 5,
@@ -144,23 +181,23 @@ const styles = StyleSheet.create({
   opciones: {
     flexDirection: "row",
     position: 'relative',
-    left: 400,
+    left: 410,
     position: "relative",
-    top: -27
+    top: -20
   },
   tilOp: {
-    backgroundColor: "#00A41F",
+    backgroundColor: "#31C02E",
     paddingBottom: 0,
     alignItems: "stretch",
     paddingTop: 10,
     position: "relative",
-    top: -240
+    top: 19
   },
   ti: {
     position: "relative",
-    top: 5,
+    top: 9,
     fontSize: 25,
-    left: 130,
+    left: 180,
   },
   progre: {
     position: "relative",
@@ -177,7 +214,7 @@ const styles = StyleSheet.create({
   circleIcon: {
     backgroundColor: "#5FBC3E",
     borderRadius: 100,
-    padding: 9,
+    padding: 15,
     position: 'relative',
     left: -5,
     fontSize: 10,
@@ -186,17 +223,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 40,
     backgroundColor: "#FFFFFF",
-    paddingVertical: 3,
+    paddingVertical: 5,
     paddingHorizontal: 6,
     borderRadius: 10,
     position: "relative",
-    top: -200,
+    top: -15,
   },
   horario: {
     position: 'relative',
-    left: 10,
+    left: 140,
     paddingVertical: 15,
-    fontSize: 13,
+    fontSize: 18,
   },
   total: {
     flexDirection: "row",
@@ -218,46 +255,38 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingHorizontal: 15,
     position: "relative",
-    top: 265,
+    top: 1,
   },
   registrar: {
-    width: "100%",
-    height: 60,
+    width: 380,
+    height: 70,
     marginTop: 40,
     alignContent: "center",
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
     borderRadius: 40,
-    backgroundColor: '#0D7701',
-    top: 220,
+    backgroundColor: 'white',
   },
   tituloBoton2: {
     color: "#FFFFFF",
     fontSize: 15,
     fontWeight: "600",
   },
-  tituloBoton2: {
-    color: "#FFFFFF",
-    fontSize: 20,
-    fontWeight: "600",
+  contenedorFuera: {
+    width: "100%",
+    borderWidth: 15,
+    borderColor: "#BAFBB9",
   },
-  controles: {
-    flex: 3,
-    marginBottom: 1,
-    paddingLeft: 10,
-    paddingRight: 10,
-
-  },
-  entradas: {
-    flexDirection: "row",
-    marginTop: 40,
-    backgroundColor: "#FFFFFF",
-    paddingVertical: 15,
-    paddingHorizontal: 6,
+  sucursales: {
     borderRadius: 10,
-    position: "relative",
-    top: -235,
-    fontSize: 20,
+  },
+  descripcion: {
+    fontSize: 22,
+    left: 155,
+    padding: 10,
+  },
+  contenedorDentro: {
+    borderRadius: 100,
   }
 });

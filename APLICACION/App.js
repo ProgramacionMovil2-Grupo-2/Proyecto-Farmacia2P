@@ -5,7 +5,7 @@ import Login from "./src/componentes/login";
 
 export default function App() {
   return (
-    <Login></Login>
+    <Navigation></Navigation>
   
   );
 }

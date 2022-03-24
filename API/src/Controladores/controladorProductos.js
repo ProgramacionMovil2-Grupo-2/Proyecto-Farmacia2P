@@ -29,7 +29,7 @@ exports.buscarProducto = async (req, res) => {
 
         const lista = await ModeloProducto.findAll({
             where: {
-                estado: filtro
+                nombre: filtro
             }
         });
         if (lista.length == 0) {

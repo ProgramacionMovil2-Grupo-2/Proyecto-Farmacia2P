@@ -8,8 +8,8 @@ const Stack = createNativeStackNavigator();
 
 
 
-
-import inicio from './src/componentes/categoriaProducto';
+import productos from "./src/componentes/productosNuevo2";
+import Categorias from "./src/componentes/categoriaProductoNuevo";
 import buscar from './src/componentes/buscarProducto2';
 import historial from './src/componentes/historialPedido'
 import carrito from './src/componentes/carritoCompras'
@@ -17,9 +17,7 @@ import carrito from './src/componentes/carritoCompras'
 
 import confirmarDomicilio from './src/componentes/confirmarDomicilio';
 import confirmarSucursal from './src/componentes/confirmarSucursal';
-import domicilio from './src/componentes/domicilio'
-import pedido from './src/componentes/pedido'
-import productoNuevo from './src/componentes/productosNuevo';
+import domicilio from './src/componentes/domicilio';
 import sucursal from './src/componentes/sucursal';
 import tipoEntrega from './src/componentes/tipoEntrega'
 //import { exp } from "react-native/Libraries/Animated/Easing";
@@ -41,25 +39,13 @@ export default function Navigaion() {
             >
                 <Stack.Screen
                     name="inicio"
-                    component={tipoEntrega}
-                    options={{
-                        tabBarLabel: 'Inicio',
-                        tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="home" size={35} color="black" />
-                        ),
-                        headerShown: false,
-                    }}
+                    component={Categorias}
+                    
                 />
                 <Stack.Screen
                     name="Buscar"
-                    component={carrito}
-                    options={{
-                        tabBarLabel: 'Buscar Producto',
-                        tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="card-search" size={35} color="black" />
-                        ),
-                        headerShown: false,
-                    }}
+                    component={buscar}
+                   
                 />
                 <Stack.Screen
                     name="Historial"
@@ -113,7 +99,16 @@ export default function Navigaion() {
                 <Stack.Screen
                     name="TipoEntrega"
                     component={tipoEntrega}
-                />      
+                />    
+
+                <Stack.Screen
+                    name="Productos"
+                    component={productos}
+                />
+                <Stack.Screen
+                    name="Categoria"
+                    component={Categorias}
+                />  
 
             </Stack.Navigator>
 

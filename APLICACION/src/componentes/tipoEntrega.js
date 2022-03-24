@@ -90,7 +90,7 @@ export default function App({ navigation }) {
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => {
-              navigation.navigate('Productos')
+              navigation.navigate('Pedidos')
             }}>
               <View>
                 <AntDesign name='filetext1' style={{ fontSize: 25 }} />

@@ -19,14 +19,15 @@ import confirmarDomicilio from './src/componentes/confirmarDomicilio';
 import confirmarSucursal from './src/componentes/confirmarSucursal';
 import domicilio from './src/componentes/domicilio';
 import sucursal from './src/componentes/sucursal';
-import tipoEntrega from './src/componentes/tipoEntrega'
+import tipoEntrega from './src/componentes/tipoEntrega';
+import Pedidos from './src/componentes/pedidosHistorial2';
 //import { exp } from "react-native/Libraries/Animated/Easing";
 //import { color } from "react-native-reanimated";
 
 const Tab = createBottomTabNavigator();
 
 
-export default function Navigaion() {
+export default function Navigation() {
     return (
         <NavigationContainer>
 
@@ -109,6 +110,10 @@ export default function Navigaion() {
                     name="Categoria"
                     component={Categorias}
                 />  
+                 <Stack.Screen
+                    name="Pedidos"
+                    component={Pedidos}
+                /> 
 
             </Stack.Navigator>
 

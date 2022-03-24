@@ -1,10 +1,16 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert, Image, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert, Image, ImageBackground,TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import "react-native-gesture-handler";
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
-export default function login() {
+export default function login({ navigation }) {
     const [usuario, setUsuario] = useState(null);
     const [contrasena, setContrasena] = useState(null);
+
 
     const presIniciarSesion = async() =>{
         if(!usuario || !contrasena){
@@ -14,7 +20,7 @@ export default function login() {
         else{
             try {
                 const respuesta = await fetch(
-                    'http://192.168.1.2:4001/api/autenticacion/iniciosesion',{
+                    'http://192.168.1.39:4001/api/autenticacion/iniciosesion',{
                         method: 'POST',
                         headers:{
                             accept: 'application/json',
@@ -37,6 +43,7 @@ export default function login() {
                   await AsyncStorage.setItem('Token', token);
                 }
                 Alert.alert("ALERTA", json.msj);
+              
             } catch (error) {
                 console.error(error);
             }
@@ -102,9 +109,15 @@ export default function login() {
               </View>
               <View style={styles.boton}>
               <Button title="Registrate" color={"#3A6C96"} fontSize="200"//hover={"#FFFFFF"}
-              onPress={pressToken}
+              
               ></Button>
             </View>
+            <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Productos')
+            }}>
+            <Text >iniciar</Text>
+          </TouchableOpacity>
           </View>
         </View>
       </View>

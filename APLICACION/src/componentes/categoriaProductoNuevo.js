@@ -120,7 +120,7 @@ export default function tipoEntrega({ navigation }) {
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => {
-              navigation.navigate('Productos')
+              navigation.navigate('Pedidos')
             }}>
               <View>
                 <AntDesign name='filetext1' style={{ fontSize: 25 }} />

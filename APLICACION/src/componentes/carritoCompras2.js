@@ -129,12 +129,16 @@ export default function App({ navigation }) {
                   
                      <Text style={styles.id}>
                         Codigo de barras : 
+                        
+                        <Text style={styles.codigobarras}>
                         {item.codigobarras}
+                      </Text>
                       </Text>
                       <Text style={styles.id}>
                         Nombre producto : 
+                        <Text style={styles.nombre}>
                         {item.nombre}
-                    
+                      </Text>
                       </Text>
                       <Text style={styles.id}>
                         Tipo  : 
@@ -150,7 +154,6 @@ export default function App({ navigation }) {
                         </Text>
                      
                       <Image source={{uri: item.imagen}} style={{width: 120, height: 140, left: 300, top: -160}} />
-                      
                       </View>
                       <TouchableOpacity style={styles.boton}>
                      <Text style={styles.tituloBoton2}>Editar</Text>
@@ -165,10 +168,7 @@ export default function App({ navigation }) {
                      </TextInput>
                      </View>
                   </View>
-               
                 </Pressable>
-
-                
               );
             }}
           />
@@ -176,9 +176,6 @@ export default function App({ navigation }) {
 
        
         
-        
-      
-        <View style={styles.menu1}>
         <TouchableOpacity style={styles.OpCarrito}
          onPress={() => navigation.navigate('Productos')}
         >
@@ -195,6 +192,8 @@ export default function App({ navigation }) {
             </TouchableOpacity>
 
           </View>
+      
+        <View style={styles.menu1}>
         <View style={styles.menu}>
             <TouchableOpacity onPress={() => {
               navigation.navigate('inicio')
@@ -297,9 +296,7 @@ const styles = StyleSheet.create({
   contenedorFuera: {
     top: 10,
     width: "100%",
-    height: 310,
     borderWidth: 2,
-    borderRadius: 25,
     borderColor: "#BAFBB9",
     backgroundColor: "white",
   },
@@ -331,12 +328,14 @@ const styles = StyleSheet.create({
   },
   OpCarrito: {
     flexDirection: "row",
+    marginTop: 40,
      width:'100%',
      height: 70,
-    
+     marginTop: 40,
      alignContent: "center",
      justifyContent: "center",
      alignItems: "center",
+     padding: 10,
      borderRadius: 40,
      backgroundColor: '#FFFFFF',
      position: "relative",
@@ -359,11 +358,13 @@ const styles = StyleSheet.create({
       flexDirection: "row",
     },
     productos:{
-    
+      position: "relative",
       top: -50,
-      height: "90%",
     },
-   
+    productos:{
+        position: "relative",
+        top: -50,
+      },
       tipo: {
         textAlign: "left",
         color: "black", 

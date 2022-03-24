@@ -70,45 +70,45 @@ export default function App({ navigation }) {
 
 
             <View style={styles.menu1}>
-                <View style={styles.menu}>
-                    <TouchableOpacity onPress={() => {
-                        navigation.navigate('Buscar')
-                    }}>
-                        <View>
-                            <FontAwesome name='home' style={{ fontSize: 25 }}
-                            />
-                        </View>
-                    </TouchableOpacity>
+          <View style={styles.menu}>
+            <TouchableOpacity onPress={() => {
+              navigation.navigate('inicio')
+            }}>
+              <View>
+                <FontAwesome name='home' style={{ fontSize: 25 }}
+                />
+              </View>
+            </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => {
-                        navigation.navigate('Buscar')
-                    }}>
-                        <View>
-                            <AntDesign name='search1' style={{ fontSize: 25 }} />
+            <TouchableOpacity onPress={() => {
+              navigation.navigate('Buscar')
+            }}>
+              <View>
+                <AntDesign name='search1' style={{ fontSize: 25 }} />
 
-                        </View>
-                    </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => {
-                        navigation.navigate('Buscar')
-                    }}>
-                        <View>
-                            <AntDesign name='filetext1' style={{ fontSize: 25 }} />
+            <TouchableOpacity onPress={() => {
+              navigation.navigate('Productos')
+            }}>
+              <View>
+                <AntDesign name='filetext1' style={{ fontSize: 25 }} />
 
-                        </View>
-                    </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => {
-                        navigation.navigate('Buscar')
-                    }}>
-                        <View>
-                            <AntDesign name='shoppingcart' style={{ fontSize: 25 }} />
+            <TouchableOpacity onPress={() => {
+              navigation.navigate('Carrito')
+            }}>
+              <View>
+                <AntDesign name='shoppingcart' style={{ fontSize: 25 }} />
 
-                        </View>
-                    </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
 
-                </View>
-            </View>
+          </View>
+        </View>
 
 
 
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
         padding: 10,
         paddingHorizontal: 15,
         position: "relative",
-        top: 420,
+        top: 440,
       
     },
 });

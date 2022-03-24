@@ -101,7 +101,7 @@ export default function tipoEntrega({ navigation }) {
 
                   <View style={styles.circleIcon}>
                     <TouchableOpacity onPress={() => {
-                      navigation.navigate('Buscar')
+                      navigation.navigate('Carrito')
                     }}>
                       <View>
                         <Feather name='plus' style={{ fontSize: 25 }}
@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
   OpEntrega: {
     flexDirection: "row",
     marginTop: 40,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#BAFBB9",
     paddingVertical: 5,
     paddingHorizontal: 6,
     borderRadius: 10,
@@ -303,8 +303,10 @@ const styles = StyleSheet.create({
   },
   contenedorFuera: {
     width: "100%",
-    borderWidth: 15,
+    borderWidth: 3,
     borderColor: "#BAFBB9",
+    borderRadius: 25,
+    top: 25
   },
   sucursales: {
     borderRadius: 10,

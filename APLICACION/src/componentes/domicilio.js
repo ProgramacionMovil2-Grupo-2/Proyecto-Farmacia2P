@@ -60,12 +60,10 @@ export default function App({navigation}) {
 
         
           
-        
-
-        <View style={styles.menu1}>
+          <View style={styles.menu1}>
           <View style={styles.menu}>
             <TouchableOpacity onPress={() => {
-              navigation.navigate('Buscar')
+              navigation.navigate('inicio')
             }}>
               <View>
                 <FontAwesome name='home' style={{ fontSize: 25 }}
@@ -83,7 +81,7 @@ export default function App({navigation}) {
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => {
-              navigation.navigate('Buscar')
+              navigation.navigate('Productos')
             }}>
               <View>
                 <AntDesign name='filetext1' style={{ fontSize: 25 }} />
@@ -92,7 +90,7 @@ export default function App({navigation}) {
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => {
-              navigation.navigate('Buscar')
+              navigation.navigate('Carrito')
             }}>
               <View>
                 <AntDesign name='shoppingcart' style={{ fontSize: 25 }} />
@@ -102,6 +100,8 @@ export default function App({navigation}) {
 
           </View>
         </View>
+
+        
 
 
 

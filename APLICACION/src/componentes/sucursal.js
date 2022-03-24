@@ -114,10 +114,10 @@ export default function App({ navigation }) {
           </View>
         
 
-        <View style={styles.menu1}>
+          <View style={styles.menu1}>
           <View style={styles.menu}>
             <TouchableOpacity onPress={() => {
-              navigation.navigate('Buscar')
+              navigation.navigate('inicio')
             }}>
               <View>
                 <FontAwesome name='home' style={{ fontSize: 25 }}
@@ -135,7 +135,7 @@ export default function App({ navigation }) {
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => {
-              navigation.navigate('Buscar')
+              navigation.navigate('Productos')
             }}>
               <View>
                 <AntDesign name='filetext1' style={{ fontSize: 25 }} />
@@ -144,7 +144,7 @@ export default function App({ navigation }) {
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => {
-              navigation.navigate('Buscar')
+              navigation.navigate('Carrito')
             }}>
               <View>
                 <AntDesign name='shoppingcart' style={{ fontSize: 25 }} />
@@ -171,7 +171,7 @@ export default function App({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#eee',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -179,6 +179,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderWidth: 2,
     borderColor: "#eee",
+    backgroundColor: "white",
   },
   contenedorDentro: {
     margin: 10,
@@ -221,7 +222,7 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     paddingTop: 100,
     position: "relative",
-    top: -110,
+    top: -20,
 
   },
   ti: {
@@ -233,7 +234,7 @@ const styles = StyleSheet.create({
   progre: {
     backgroundColor: "#31C02E",
     position: "relative",
-    top: -110
+    top: -20
   },
   avance: {
     flexDirection: "row",
@@ -257,7 +258,7 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingHorizontal: 15,
     position: "relative",
-    top: 30,
+    top: -20,
 
   },
 });

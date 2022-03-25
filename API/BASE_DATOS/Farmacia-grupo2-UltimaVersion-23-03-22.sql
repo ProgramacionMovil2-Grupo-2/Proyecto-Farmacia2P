@@ -1,9 +1,8 @@
 -- Base de datos Grupo 2
--- Fecha creacion: 23/03/2022
+-- Fecha creacion: 25/03/2022
 
-CREATE database Farmacia_Grupo2;
+create database Farmacia_Grupo2;
 USE Farmacia_Grupo2;
-drop database Farmacia_Grupo2;
 -- -----------------------------------------------------
 -- Table `Farmacia`.`proveedores`
 -- -----------------------------------------------------
@@ -59,21 +58,18 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Usuarios (
   id INT NOT NULL AUTO_INCREMENT,
-  id_personas INT NOT NULL,
   login VARCHAR(45) NOT NULL,
   correo VARCHAR(250) NOT NULL,
   contrasena VARCHAR(250) NOT NULL,
   estado ENUM('ACTIVO', 'INACTIVO') NULL,
   pin CHAR(4) NULL,
-  PRIMARY KEY (id),
-  INDEX id_idx (id_personas ASC) VISIBLE,
-  CONSTRAINT id
-    FOREIGN KEY (id_personas)
-    REFERENCES Personas (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (id))
 ENGINE = InnoDB;
-
+select * from Usuarios
+insert into Usuarios (login,correo,contrasena,estado,pin) values ('calderon','sj_calderonr@unicah.edu','sandraCa1d3r0n','1','1234');
+insert into Usuarios (login,correo,contrasena,estado,pin) values ('scalderon','sj_calderonr@unicah.edu','12345678','1','1234');
+insert into Usuarios (login,correo,contrasena,estado,pin) values ('jcalderon','calderon21sandra@gmail.com','C@1d3r0nJack3l1n','1','1234');
+insert into Usuarios (login,correo,contrasena,estado,pin) values ('jacalderon','sandra21calderon@gmail.com','12345678','1','1234');
 -- -----------------------------------------------------
 -- Table `Farmacia`.`Productos`
 -- -----------------------------------------------------
@@ -262,32 +258,68 @@ create view DetalleCarritoV as select dv.id, dv.idCarrito, p.nombre, p.codigobar
 inner join Ventas as v on dv.idCarrito=v.id  inner join Productos as p 
 on dv.idProducto=p.id inner join tipos as t on p.idtipo=t.id;
 
+select dv.id, dv.idCarrito, p.nombre, p.codigobarras, p.impuesto, p.precio, t.descripcion, dv.cantidad, dv.descuento, p.imagen,
+sum(p.precio*dv.cantidad)+sum(p.precio*dv.cantidad)*(p.impuesto/100)-sum(p.precio*dv.cantidad)*(dv.descuento/100) as Total from detalleVentas as dv 
+inner join Ventas as v on dv.idCarrito=v.id  inner join Productos as p 
+on dv.idProducto=p.id inner join tipos as t on p.idtipo=t.id where dv.idCarrito='1' group by dv.idCarrito,p.nombre,p.codigobarras,
+p.impuesto, p.precio,t.descripcion,dv.cantidad, dv.descuento,p.imagen, Total;
+
+select * from Totales;
+create view Totales as select sum(p.precio*dv.cantidad) as Subtotal, sum(p.precio*dv.cantidad)*(p.impuesto/100) as Impuesto, 
+sum(p.precio*dv.cantidad)*(dv.descuento/100) as Descuento,
+sum(p.precio*dv.cantidad)+sum(p.precio*dv.cantidad)*(p.impuesto/100)-sum(p.precio*dv.cantidad)*(dv.descuento/100) as Total
+from detalleVentas as dv 
+inner join Ventas as v on dv.idCarrito=v.id  inner join Productos as p 
+on dv.idProducto=p.id inner join tipos as t on p.idtipo=t.id where dv.idCarrito='1';
+
+
 -- -----------------------------------------------------
 -- INSERCIONES
 -- -----------------------------------------------------
 
-insert into tipo (descripcion) values ('Cicatrizantes'),('Analgesico'),('Vitaminas'),('Proteccion');
+insert into tipos (descripcion) values ('Cicatrizantes'),('Analgesico'),('Vitaminas'),('Proteccion');
 
 insert into Personas ( identidad,nombre,apellido,edad,telefono,rtn,direccion,estado,imagen,tipo) 
 values('0318200402610','Sandra','Calderon','21','33668853',null,'Siguatepeque',true,null,'EM'),
 ('1212200100016','Daniela','Vasquez','21','99999999',null,'Marcala',true,null,'EM');
 
+insert into Personas ( identidad,nombre,apellido,edad,telefono,rtn,direccion,estado,imagen,tipo) 
+values('0310200100100','Carlos','Flores','25','99012345',null,'Siguatepeque',true,null,'EM');
+
 insert into Productos (nombre,fechavencimiento,codigobarras,descripcion, impuesto, precio,idtipo,imagen, estado) values
- ('Neobol','2022-01-11','1000001',null,'15','190','1','http://192.168.1.39:4001/usuario/img/img-1648009270620-444358499image.png','1'),
- ('Emulsion Scott','2022-01-11','1000002',null,'15','150','3','http://192.168.1.39:4001/usuario/img/img-1648009270620-444358499image.png','1'),
- ('Panadol','2022-01-11','1000003',null,'15','10','2','http://192.168.1.39:4001/usuario/img/img-1648009270620-444358499image.png','1'),
- ('Sudagrip','2022-01-11','1000004',null,'15','10','2','http://192.168.1.39:4001/usuario/img/img-1648009270620-444358499image.png','1'),
- ('Mascarillas','2022-01-11','1000005',null,'15','100','4','http://192.168.1.39:4001/usuario/img/img-1648009270620-444358499image.png','1'),
- ('Gasas','2022-01-11','1000006',null,'15','50','4','http://192.168.1.39:4001/usuario/img/img-1648009270620-444358499image.png','1'),
- ('Tetraciclina','2022-01-11','1000007',null,'15','70','2','http://192.168.1.39:4001/usuario/img/img-1648009270620-444358499image.png','1'),
- ('Alcohol Clinico','2022-01-11','1000008',null,'15','80','4','http://192.168.1.39:4001/usuario/img/img-1648009270620-444358499image.png','1'),
- ('Jarabe','2022-01-11','1000009',null,'15','100','2','http://192.168.1.39:4001/usuario/img/img-1648009270620-444358499image.png','1'),
- ('Povidone','2022-01-11','1000010',null,'15','130','1','http://192.168.1.39:4001/usuario/img/img-1648009270620-444358499image.png','1');
+ ('Neobol2','2022-01-11','1000001',null,'15','190','1','http://localhost:4001/usuario/img/img-1648009386154-989785856image.jpeg','1'),
+ ('Emulsion Scott','2022-01-11','1000002',null,'15','150','3','http://192.168.1.39:4001/usuario/img/img-1648009357110-529719040image.jpeg','1'),
+ ('Panadol','2022-01-11','1000003',null,'15','10','2','http://192.168.1.39:4001/usuario/img/img-1648009393523-774329275image.jpeg','1'),
+ ('Sudagrip','2022-01-11','1000004',null,'15','10','2','http://192.168.1.39:4001/usuario/img/img-1648009406312-221969336image.jpeg','1'),
+ ('Mascarillas','2022-01-11','1000005',null,'15','100','4','http://192.168.1.39:4001/usuario/img/img-1648009375647-515855824image.jpeg','1'),
+ ('Gasas','2022-01-11','1000006',null,'15','50','4','http://192.168.1.39:4001/usuario/img/img-1648009362506-228086519image.jpeg','1'),
+ ('Acetaminofen','2022-01-11','1000007',null,'15','70','2','http://192.168.1.39:4001/usuario/img/img-1648009339195-237383900image.webp','1'),
+ ('Alcohol Clinico','2022-01-11','1000008',null,'15','80','4','http://192.168.1.39:4001/usuario/img/img-1648009349809-857909128image.webp','1'),
+ ('Jarabe','2022-01-11','1000009',null,'15','100','2','http://192.168.1.39:4001/usuario/img/img-1648009369503-953969632image.jpeg','1'),
+ ('Povidone','2022-01-11','1000010',null,'15','130','1','http://192.168.1.39:4001/usuario/img/img-1648009399820-255465088image.jpeg','1');
+ 
+ insert into Productos (nombre,fechavencimiento,codigobarras,descripcion, impuesto, precio,idtipo,imagen, estado) values
+ ('Jabon Asepxia','2022-01-11','1000011',null,'15','190','1','http://192.168.1.7:4001/usuario/img/img-1648009386154-989785856image.jpeg','1');
+ insert into Ventas (idClientes) values ('1'),('2');
+ 
+ insert into sucursal (ciudad,direccion,telefono) values ('Tegucigalpa','el centro','27731234'),
+ ('San Pedro Sula','el centro','27731234'),('Comayagua','el centro','27731234'),
+ ('Siguatepeque','San Juan','27732546');
+ 
+
+ 
+ insert into detalleVentas (idCarrito,idProducto,cantidad,descuento) values 
+ ('1','8','2','0'),('1','3','4','0'),('1','4','10','0'),('1','6','4','0'),
+ ('1','10','1','0'),('2','9','2','0'),('2','3','5','0'),('2','5','3','0');
+ 
+ Insert into Pedidos (idVenta,fechaPedido) values ('1','2022-01-11'),('1','2022-01-01'),('2','2022-01-01');
 
 select * from detalleVentas;
 select * from Ventas;
+select * from Personas;
 select * from Productos;
 select * from DetalleCarritoV;
+
 
 
 
